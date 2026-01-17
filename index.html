@@ -1,472 +1,264 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roadmap Software Engineer</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Software Engineer Roadmap</title>
 
 <style>
-:root{
-    --bg:#020617;
-    --card:#0f172a;
-    --border:#1e293b;
-    --text:#e5e7eb;
-    --muted:#9ca3af;
-    --primary:#3b82f6;
-    --success:#10b981;
-    --warning:#f59e0b;
-    --danger:#ef4444;
-    --purple:#8b5cf6;
+:root {
+  --bg: #020617;
+  --card: #0f172a;
+  --accent: #38bdf8;
+  --success: #22c55e;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,Tahoma,sans-serif;
+.light {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --accent: #0284c7;
+  --success: #16a34a;
+  --text: #020617;
+  --muted: #475569;
 }
 
-body{
-    background:linear-gradient(135deg,#020617,#020617,#0f172a);
-    color:var(--text);
-    padding:20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
+body {
+  background: var(--bg);
+  color: var(--text);
+  padding: 20px;
+  transition: 0.3s;
 }
 
-header{
-    text-align:center;
-    margin-bottom:40px;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-header h1{
-    font-size:2.5rem;
-    margin-bottom:10px;
+h1 {
+  font-size: 1.6rem;
 }
 
-header p{
-    color:var(--muted);
+.toggle {
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--muted);
 }
 
-.roadmap{
-    display:flex;
-    flex-direction:column;
-    gap:35px;
+.stage {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease;
 }
 
-.stage{
-    background:var(--card);
-    border-radius:16px;
-    padding:25px;
-    border-right:6px solid;
+.stage h2 {
+  color: var(--accent);
+  margin-bottom: 10px;
 }
 
-.stage-1{border-color:var(--primary)}
-.stage-2{border-color:var(--success)}
-.stage-3{border-color:var(--warning)}
-.stage-4{border-color:var(--danger)}
-.stage-5{border-color:var(--purple)}
-
-.stage-header{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:20px;
-    border-bottom:1px dashed var(--border);
-    padding-bottom:15px;
+.progress-box {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+  margin-bottom: 12px;
 }
 
-.stage-icon{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:var(--primary);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:1.6rem;
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  transition: 0.4s;
 }
 
-.stage-title{
-    font-size:1.7rem;
+.badge {
+  display: none;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: rgba(34,197,94,0.15);
+  color: var(--success);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  width: fit-content;
 }
 
-.stage-sub{
-    color:var(--muted);
-    font-size:0.9rem;
+ul {
+  list-style: none;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.card{
-    background:#020617;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:18px;
+li:hover {
+  transform: translateX(6px);
 }
 
-.card h3{
-    margin-bottom:10px;
-    display:flex;
-    align-items:center;
-    gap:10px;
+li.checked {
+  background: rgba(34,197,94,0.2);
+  color: var(--success);
+  text-decoration: line-through;
 }
 
-.card ul{
-    list-style:disc;
-    padding-right:22px;
-    color:var(--muted);
-    line-height:1.8;
-    font-size:0.95rem;
+input {
+  transform: scale(1.2);
 }
 
-.specializations{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.spec{
-    flex:1;
-    min-width:260px;
-    background:#020617;
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:20px;
+@media (max-width: 768px) {
+  body { padding: 12px; }
+  h1 { font-size: 1.3rem; }
 }
-
-.spec h3{
-    margin-bottom:10px;
-}
-
-footer{
-    margin-top:50px;
-    text-align:center;
-    color:var(--muted);
-    font-size:0.95rem;
-}@media (max-width: 768px) {
-
-    body {
-        padding: 12px;
-    }
-
-    header h1 {
-        font-size: 1.9rem;
-        line-height: 1.3;
-    }
-
-    header p {
-        font-size: 0.95rem;
-    }
-
-    .stage {
-        padding: 18px;
-        border-right-width: 4px;
-    }
-
-    .stage-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .stage-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-    }
-
-    .stage-title {
-        font-size: 1.35rem;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .specializations {
-        flex-direction: column;
-    }
-
-    .card,
-    .spec {
-        padding: 15px;
-    }
-
-    .card h3,
-    .spec h3 {
-        font-size: 1.1rem;
-    }
-
-    .card ul,
-    .spec ul {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
-
-    footer {
-        font-size: 0.85rem;
-        line-height: 1.6;
-    }
-}
-
-/* موبايلات صغيرة جدًا */
-@media (max-width: 480px) {
-
-    header h1 {
-        font-size: 1.6rem;
-    }
-
-    .stage-title {
-        font-size: 1.2rem;
-    }
-
-    .stage-sub {
-        font-size: 0.8rem;
-    }
-
-    .stage {
-        padding: 15px;
-    }
-}
-
 </style>
 </head>
 
 <body>
-<div class="container">
 
 <header>
-    <h1>🚀 Roadmap لتصبح Software Engineer</h1>
-    <p>خريطة طريق عملية من الصفر لحد الاحتراف</p>
+  <h1>🚀 Software Engineer Roadmap</h1>
+  <div class="toggle" id="themeToggle">🌙</div>
 </header>
 
-<div class="roadmap">
+<!-- STAGE TEMPLATE -->
+<div class="stage" data-stage="1">
+  <h2>المرحلة 1: الأساسيات</h2>
+  <div class="progress-box"><div class="progress"></div></div>
 
-<!-- المرحلة 1 -->
-<div class="stage stage-1">
-    <div class="stage-header">
-        <div class="stage-icon"><i class="fas fa-book"></i></div>
-        <div>
-            <div class="stage-title">المرحلة 1: الأساسيات (Foundations)</div>
-            <div class="stage-sub">أهم مرحلة – متستعجلش</div>
-        </div>
-    </div>
+  <ul>
+    <li><input type="checkbox"> Programming Language</li>
+    <li><input type="checkbox"> Variables & Data Types</li>
+    <li><input type="checkbox"> Loops & Conditions</li>
+    <li><input type="checkbox"> Functions</li>
+    <li><input type="checkbox"> OOP</li>
+    <li><input type="checkbox"> Data Structures Basics</li>
+  </ul>
 
-    <div class="grid">
-        <div class="card">
-            <h3><i class="fas fa-code"></i> البرمجة الأساسية</h3>
-            <ul>
-                <li>لغة واحدة كويسة: Python أو C++ أو JavaScript</li>
-                <li>Variables, Data types</li>
-                <li>Loops, Conditionals</li>
-                <li>Functions / Methods</li>
-                <li>Arrays / Lists</li>
-                <li>Objects (OOP)</li>
-                <li>التدريب على LeetCode, HackerRank</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3><i class="fas fa-project-diagram"></i> Algorithms & Data Structures</h3>
-            <ul>
-                <li>Arrays, Strings</li>
-                <li>Linked Lists</li>
-                <li>Stacks & Queues</li>
-                <li>Hash Tables / Maps</li>
-                <li>Trees (Binary Tree, BST)</li>
-                <li>Graphs basics</li>
-                <li>Sorting & Searching</li>
-                <li>Big O Notation</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3><i class="fas fa-laptop"></i> أساسيات الكمبيوتر</h3>
-            <ul>
-                <li>CPU, RAM, Storage</li>
-                <li>Networking: HTTP, TCP/IP</li>
-                <li>Operating Systems basics</li>
-                <li>Processes, Threads, Memory</li>
-            </ul>
-        </div>
-    </div>
+  <div class="badge">🏆 Stage Completed</div>
 </div>
 
-<!-- المرحلة 2 -->
-<div class="stage stage-2">
-    <div class="stage-header">
-        <div class="stage-icon"><i class="fas fa-tools"></i></div>
-        <div>
-            <div class="stage-title">المرحلة 2: المهارات العملية</div>
-        </div>
-    </div>
+<div class="stage" data-stage="2">
+  <h2>المرحلة 2: المهارات العملية</h2>
+  <div class="progress-box"><div class="progress"></div></div>
 
-    <div class="grid">
-        <div class="card">
-            <h3><i class="fab fa-git-alt"></i> Git & GitHub</h3>
-            <ul>
-                <li>git init, clone, commit</li>
-                <li>push, pull</li>
-                <li>Branching & Merging</li>
-                <li>نشر مشاريع على GitHub</li>
-            </ul>
-        </div>
+  <ul>
+    <li><input type="checkbox"> Git & GitHub</li>
+    <li><input type="checkbox"> Branching</li>
+    <li><input type="checkbox"> Testing</li>
+    <li><input type="checkbox"> Debugging</li>
+    <li><input type="checkbox"> Databases</li>
+  </ul>
 
-        <div class="card">
-            <h3><i class="fas fa-bug"></i> Testing & Debugging</h3>
-            <ul>
-                <li>Unit Testing (pytest, JUnit)</li>
-                <li>Debugging skills</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3><i class="fas fa-database"></i> Databases</h3>
-            <ul>
-                <li>SQL: MySQL, PostgreSQL</li>
-                <li>NoSQL: MongoDB</li>
-                <li>CRUD Operations</li>
-            </ul>
-        </div>
-    </div>
+  <div class="badge">🏆 Stage Completed</div>
 </div>
 
-<!-- المرحلة 3 -->
-<div class="stage stage-3">
-    <div class="stage-header">
-        <div class="stage-icon"><i class="fas fa-road"></i></div>
-        <div>
-            <div class="stage-title">المرحلة 3: التخصص</div>
-        </div>
-    </div>
+<div class="stage" data-stage="3">
+  <h2>المرحلة 3: التخصص</h2>
+  <div class="progress-box"><div class="progress"></div></div>
 
-    <div class="specializations">
-        <div class="spec">
-            <h3>Frontend</h3>
-            <ul>
-                <li>HTML, CSS, JavaScript</li>
-                <li>React.js أو Vue.js</li>
-                <li>Responsive Design</li>
-                <li>UI / UX basics</li>
-            </ul>
-        </div>
+  <ul>
+    <li><input type="checkbox"> Frontend / Backend</li>
+    <li><input type="checkbox"> Frameworks</li>
+    <li><input type="checkbox"> REST APIs</li>
+    <li><input type="checkbox"> Authentication</li>
+  </ul>
 
-        <div class="spec">
-            <h3>Backend</h3>
-            <ul>
-                <li>Node.js / Django / Spring</li>
-                <li>RESTful APIs</li>
-                <li>JWT, OAuth</li>
-                <li>SQL + NoSQL Integration</li>
-            </ul>
-        </div>
-
-        <div class="spec">
-            <h3>Full-Stack</h3>
-            <ul>
-                <li>Frontend + Backend</li>
-                <li>Deployment (Vercel, AWS)</li>
-                <li>CI / CD & GitHub Actions</li>
-            </ul>
-        </div>
-    </div>
+  <div class="badge">🏆 Stage Completed</div>
 </div>
 
-<!-- المرحلة 4 -->
-<div class="stage stage-4">
-    <div class="stage-header">
-        <div class="stage-icon"><i class="fas fa-rocket"></i></div>
-        <div>
-            <div class="stage-title">المرحلة 4: الاحتراف</div>
-        </div>
-    </div>
+<div class="stage" data-stage="4">
+  <h2>المرحلة 4: الاحتراف</h2>
+  <div class="progress-box"><div class="progress"></div></div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>Advanced DSA</h3>
-            <ul>
-                <li>Heaps, Tries</li>
-                <li>DFS, BFS</li>
-                <li>Dijkstra</li>
-            </ul>
-        </div>
+  <ul>
+    <li><input type="checkbox"> Advanced Algorithms</li>
+    <li><input type="checkbox"> System Design</li>
+    <li><input type="checkbox"> Docker & CI/CD</li>
+  </ul>
 
-        <div class="card">
-            <h3>System Design</h3>
-            <ul>
-                <li>Load Balancing</li>
-                <li>Caching</li>
-                <li>Microservices</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>DevOps</h3>
-            <ul>
-                <li>Docker</li>
-                <li>Kubernetes</li>
-                <li>CI / CD</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>Soft Skills</h3>
-            <ul>
-                <li>Problem Solving</li>
-                <li>Agile / Scrum</li>
-                <li>Code Review</li>
-            </ul>
-        </div>
-    </div>
+  <div class="badge">🏆 Stage Completed</div>
 </div>
 
-<!-- المرحلة 5 -->
-<div class="stage stage-5">
-    <div class="stage-header">
-        <div class="stage-icon"><i class="fas fa-trophy"></i></div>
-        <div>
-            <div class="stage-title">المرحلة 5: Portfolio</div>
-        </div>
-    </div>
+<div class="stage" data-stage="5">
+  <h2>المرحلة 5: Portfolio</h2>
+  <div class="progress-box"><div class="progress"></div></div>
 
-    <div class="grid">
-        <div class="card">
-            <h3>مشاريع حقيقية</h3>
-            <ul>
-                <li>موقع شخصي / Blog</li>
-                <li>API Service</li>
-                <li>Full-Stack Web App</li>
-                <li>مشاريع توضّح مستواك</li>
-            </ul>
-        </div>
+  <ul>
+    <li><input type="checkbox"> Personal Website</li>
+    <li><input type="checkbox"> API Project</li>
+    <li><input type="checkbox"> Full-Stack App</li>
+    <li><input type="checkbox"> Apply for Jobs</li>
+  </ul>
 
-        <div class="card">
-            <h3>التقديم</h3>
-            <ul>
-                <li>Internships</li>
-                <li>Freelance Projects</li>
-            </ul>
-        </div>
-    </div>
+  <div class="badge">🏆 Stage Completed</div>
 </div>
 
-</div>
+<script>
+const stages = document.querySelectorAll(".stage");
+const themeToggle = document.getElementById("themeToggle");
 
-<footer>
-    <p>💡 نصيحة: DSA + Git الأول، وبعدها مشاريع Full-Stack صغيرة</p>
-    <p>المشاريع هي اللي بتفرق مش عدد الكورسات</p>
-</footer>
+themeToggle.onclick = () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme", document.body.classList.contains("light"));
+};
 
-</div>
+if (localStorage.getItem("theme") === "true") {
+  document.body.classList.add("light");
+}
+
+stages.forEach((stage, sIndex) => {
+  const checkboxes = stage.querySelectorAll("input");
+  const progress = stage.querySelector(".progress");
+  const badge = stage.querySelector(".badge");
+
+  checkboxes.forEach((cb, i) => {
+    const key = `s${sIndex}_cb${i}`;
+    cb.checked = localStorage.getItem(key) === "true";
+    cb.parentElement.classList.toggle("checked", cb.checked);
+
+    cb.addEventListener("change", () => {
+      localStorage.setItem(key, cb.checked);
+      cb.parentElement.classList.toggle("checked", cb.checked);
+      updateStage();
+    });
+  });
+
+  function updateStage() {
+    const total = checkboxes.length;
+    const done = stage.querySelectorAll("input:checked").length;
+    const percent = Math.round((done / total) * 100);
+    progress.style.width = percent + "%";
+    badge.style.display = percent === 100 ? "block" : "none";
+  }
+
+  updateStage();
+});
+</script>
+
 </body>
 </html>
